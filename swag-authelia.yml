@@ -1,0 +1,47 @@
+--- 
+version: "2.1"
+services:
+  swag:
+    image: ghcr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=$TIMEZONE
+      - URL=$BASE_URL
+      - SUBDOMAINS=wildcard
+      - VALIDATION=dns
+      - DNSPLUGIN=cloudflare
+      - CERTPROVIDER=letsencrypt
+      - EMAIL=$ACME_EMAIL
+      - MAXMINDDB_LICENSE_KEY=$MMDB_LICENSE
+    volumes:
+      - /home/ubuntu/docker/swag/config:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    networks:
+      - swag-public
+
+  authelia:
+    image: authelia/authelia:4.30
+    container_name: authelia
+    environment:
+      - TZ=$TIMEZONE
+    volumes:
+      - /home/user/ubuntu/docker/swag/authelia:/config
+    networks:
+      - swag-public
+    restart: unless-stopped
+
+networks:
+  swag-public:
+    external: true
+
+#volumes:
+#  swag-config:
+#    external: true
+       
