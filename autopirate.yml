@@ -16,7 +16,7 @@ services:
       - PGID=$GROUP_ID
       - TZ=$TIMEZONE
     volumes:
-      - ./config:/config
+      - sonarr-config:/config
       - /tank/media:/media
     restart: $RESTART_POLICY
 
@@ -30,7 +30,7 @@ services:
       - PGID=$GROUP_ID
       - TZ=$TIMEZONE
     volumes:
-      - ./config:/config
+      - radarr-config:/config
       - /tank/media:/media
     restart: $RESTART_POLICY
 
@@ -44,7 +44,7 @@ services:
       - PGID=$GROUP_ID
       - TZ=$TIMEZONE
     volumes:
-      - ./config:/config
+      - prowlarr-config:/config
     restart: $RESTART_POLICY
 
   overseerr:
@@ -57,7 +57,7 @@ services:
       - PGID=$GROUP_ID
       - TZ=$TIMEZONE
     volumes:
-      - ./config:/config
+      - overseerr-config:/config
     restart: $RESTART_POLICY
 
   nzbget:
@@ -70,9 +70,15 @@ services:
       - PGID=$GROUP_ID
       - TZ=$TIMEZONE
     volumes:
-      - ./config:/config
+      - nzbget-config:/config
       - /tank/media/downloads:/downloads
     restart: $RESTART_POLICY
 
+volumes:
+  sonarr-config:
+  radarr-config:
+  prowlarr-config:
+  overseerr-config:
+  nzbget-config:
     
       
