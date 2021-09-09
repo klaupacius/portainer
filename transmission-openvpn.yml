@@ -1,0 +1,28 @@
+--- 
+version: "3"
+services:
+  transmission-openvpn:
+    image: haugene/transmission-openvpn:4.0
+    container_name: transmission-openvpn
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /tank/media/downloads/transmission-openvpn:/data
+    environment:
+      - OPENVPN_PROVIDER=$VPN_PROVIDER
+      - OPENVPN_CONFIG=$VPN_CONFIG
+      - OPENVPN_USERNAME=$VPN_USER
+      - OPENVPN_PASSWORD=$VPN_PWD
+      - LOCAL_NETWORK=$LAN
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+    networks:
+      - swag-public
+    #ports:
+    #  - 9091:9091
+
+networks:
+  swag-public:
+    external: true
