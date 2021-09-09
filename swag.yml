@@ -17,7 +17,7 @@ services:
       - EMAIL=$ACME_EMAIL
       - MAXMINDDB_LICENSE_KEY=$MMDB_LICENSE
     volumes:
-      - swag-config:/config
+      - /home/ubuntu/docker/swag/config:/config
     ports:
       - 80:80
       - 443:443
@@ -29,7 +29,7 @@ networks:
   swag-public:
     external: true
 
-volumes:
-  swag-config:
-    external: true
+#volumes:
+#  swag-config:
+#    external: true
        
