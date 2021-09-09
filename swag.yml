@@ -11,8 +11,9 @@ services:
       - PGID=1000
       - TZ=$TIMEZONE
       - URL=$BASE_URL
-      - SUBDOMAINS=www,
-      - VALIDATION=http
+      - SUBDOMAINS=wildcard
+      - VALIDATION=dns
+      - DNSPLUGIN=cloudflare
       - CERTPROVIDER=zerossl
       - EMAIL=$ACME_EMAIL
       - MAXMINDDB_LICENSE_KEY=$MMDB_LICENSE
