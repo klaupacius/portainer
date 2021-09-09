@@ -1,0 +1,78 @@
+--- 
+version: "3"
+
+networks:
+  swag-public:
+    external: true
+
+services:
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    networks:
+      - swag-public
+    environment:
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
+      - TZ=$TIMEZONE
+    volumes:
+      - ./config:/config
+      - /tank/media:/media
+    restart: $RESTART_POLICY
+
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    networks:
+      - swag-public
+    environment:
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
+      - TZ=$TIMEZONE
+    volumes:
+      - ./config:/config
+      - /tank/media:/media
+    restart: $RESTART_POLICY
+
+  prowlarr:
+    image: ghcr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    networks:
+      - swag-public
+    environment:
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
+      - TZ=$TIMEZONE
+    volumes:
+      - ./config:/config
+    restart: $RESTART_POLICY
+
+  overseerr:
+    image: ghcr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    networks:
+      - swag-public
+    environment:
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
+      - TZ=$TIMEZONE
+    volumes:
+      - ./config:/config
+    restart: $RESTART_POLICY
+
+  nzbget:
+    image: ghcr.io/linuxserver/nzbget
+    container_name: nzbget
+    networks:
+      - swag-public
+    environment:
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
+      - TZ=$TIMEZONE
+    volumes:
+      - ./config:/config
+      - /tank/media/downloads:/downloads
+    restart: $RESTART_POLICY
+
+    
+      
