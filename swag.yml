@@ -14,7 +14,7 @@ services:
       - SUBDOMAINS=wildcard
       - VALIDATION=dns
       - DNSPLUGIN=cloudflare
-      - CERTPROVIDER=zerossl
+      - CERTPROVIDER=letsencrypt
       - EMAIL=$ACME_EMAIL
       - MAXMINDDB_LICENSE_KEY=$MMDB_LICENSE
     volumes:
