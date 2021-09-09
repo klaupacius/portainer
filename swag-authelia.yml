@@ -32,7 +32,7 @@ services:
     environment:
       - TZ=$TIMEZONE
     volumes:
-      - /home/user/ubuntu/docker/swag/authelia:/config
+      - authelia-config:/config
     networks:
       - swag-public
     restart: unless-stopped
@@ -41,7 +41,9 @@ networks:
   swag-public:
     external: true
 
-#volumes:
+volumes:
+  authelia-config:
+    external: true
 #  swag-config:
 #    external: true
        
