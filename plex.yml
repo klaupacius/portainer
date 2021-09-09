@@ -8,6 +8,7 @@ services:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
+      - PLEX_CLAIM=claim-kTK2U1q5c93k92Wqy_BT
     volumes:
       - ./config:/config
       - /tank/media:/media
