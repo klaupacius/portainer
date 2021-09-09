@@ -1,0 +1,31 @@
+--- 
+version: "2.1"
+services:
+  swag:
+    image: ghcr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=$TIMEZONE
+      - URL=$BASE_URL
+      - SUBDOMAINS=www,
+      - VALIDATION=http
+      - CERTPROVIDER=zerossl
+      - EMAIL=$ACME_EMAIL
+      - MAXMINDDB_LICENSE_KEY=$MMDB_LICENSE
+    volumes:
+      - $CONFIG_DIR:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    networks:
+      - swag-public
+
+networks:
+  swag-public:
+    external: true
+    
