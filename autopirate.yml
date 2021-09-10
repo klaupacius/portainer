@@ -71,7 +71,7 @@ services:
       - TZ=$TIMEZONE
     volumes:
       - nzbget-config:/config
-      - /tank/media/downloads:/downloads
+      - /tank/media:/media
     restart: $RESTART_POLICY
 
 volumes:
